@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #e3f2fd;">
+    <div class="navbar-brand">
+        <img [src]="headerLogoFilename" width="30" height="30" class="d-inline-block align-top" alt="3M"> 
+        <h4 class="d-inline-block align-top m-0 custom-bold">
+            Parking System
+        </h4>
+        <button class="btn btn-primary" [routerLink]="['/home']" *ngIf="isLoggedIn">Home</button>
+        <button class="btn btn-primary" [routerLink]="['/park']" *ngIf="isLoggedIn">Park/Reserve</button>
+        <button class="btn btn-primary" [routerLink]="['/parking_details']" *ngIf="isLoggedIn">Parking Details</button>
+        <button class="btn btn-primary" [routerLink]="['/create_system']" *ngIf="isLoggedIn">Create System</button>
+       
+    </div>
+    <div class="navbar-brand ms-auto">
+        <button class="btn btn-primary" [routerLink]="['/login']" *ngIf="!isLoggedIn">Login</button>
+        <button class="btn btn-danger" [routerLink]="['/register']"*ngIf="!isLoggedIn">Register</button>
+        <button class="btn btn-danger" [routerLink]="['/login']" *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+    </div>
+</nav>
