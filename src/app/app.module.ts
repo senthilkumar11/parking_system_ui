@@ -16,7 +16,10 @@ import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CreateSystemComponent } from './create-system/create-system.component';
 import { TokenInterceptor } from './service/token.interceptor';
 import { SlotDetailsComponent } from './slot-details/slot-details.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,8 @@ import { SlotDetailsComponent } from './slot-details/slot-details.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    NgbPaginationModule
     
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

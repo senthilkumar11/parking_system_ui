@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NewEntry } from '../model/new-entry';
+import { SearchRequest } from '../model/search-request';
 import { System } from '../model/system';
 import { HttpService } from './http.service';
 
@@ -8,6 +9,9 @@ import { HttpService } from './http.service';
   providedIn: 'root'
 })
 export class ParkingService {
+  search(searchRequest:SearchRequest) {
+    return this.httpService.post("parking/search",searchRequest);
+  }
   collectFee(id: number) {
     return this.httpService.put("parking/collectfee/"+id);
   }
