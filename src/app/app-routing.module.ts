@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { NewEntryComponent } from './new-entry/new-entry.component';
 import { ParkingDetailsComponent } from './parking-details/parking-details.component';
 import { AuthGuard } from './service/auth.guard';
+import { SlotDetailsComponent } from './slot-details/slot-details.component';
 
 const routes: Routes = [{
   path:'',
@@ -36,6 +37,11 @@ const routes: Routes = [{
 {
   path:'create_system',
   component:CreateSystemComponent,
+  canActivate:[AuthGuard]
+},
+{
+  path:'slotDetails/:id',
+  component:SlotDetailsComponent,
   canActivate:[AuthGuard]
 }];
 

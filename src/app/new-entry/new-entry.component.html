@@ -1,1 +1,52 @@
-<p>new-entry works!</p>
+<div class="container-sm border border-dark p-4 mt-3 rounded" style="max-width: 600px;">
+    <form [formGroup]="parkingForm" class="text-left border border-light p-5">
+        <p class="h4 mb-4 text-center">Park / Reserve</p>
+        <div class="form-group mb-4">
+            <label for="parkingType">Vehicle Type</label>
+            <select  id="parkingType" class="form-control" formControlName="parkingType" >
+                <option value="D">Select Park/Reserve</option>
+                <option value="P">Park</option>
+                <option value="R">Reserve</option>
+            </select>
+            
+            <small class="text-danger"
+                *ngIf="(parkingForm.get('vehicleType')?.dirty&&parkingForm.get('vehicleType')?.invalid)||(parkingForm.get('vehicleType')?.invalid&&submitted)">Please
+                enter No of floors</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control " formControlName="customerName" placeholder="Name">
+            <small class="text-danger"
+                *ngIf="(parkingForm.get('customerName')?.dirty&&parkingForm.get('customerName')?.invalid)||(parkingForm.get('customerName')?.invalid&&submitted)">Please
+                enter name</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="registrationNumber">Registration number</label>
+            <input type="text" id="registrationNumber" class="form-control "
+                formControlName="vehicleRegistrationNumber" placeholder="Registration number">
+            <small class="text-danger"
+                *ngIf="(parkingForm.get('vehicleRegistrationNumber')?.dirty&&parkingForm.get('vehicleRegistrationNumber')?.invalid)||(parkingForm.get('vehicleRegistrationNumber')?.invalid&&submitted)">Please
+                enter Registration number</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="vehicleType">Vehicle Type</label>
+            <select  id="vehicleType" class="form-control" formControlName="vehicleType">
+                <option  *ngFor="let option of vehichleTypes" [value]="option.value">{{option.key}}</option>
+            </select>
+            
+            <small class="text-danger"
+                *ngIf="(parkingForm.get('vehicleType')?.dirty&&parkingForm.get('vehicleType')?.invalid)||(parkingForm.get('vehicleType')?.invalid&&submitted)">Please
+                enter No of floors</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="phNumber">Phone Number</label>
+            <input type="text" id="phNumber" class="form-control " formControlName="phNumber" placeholder="Phone Number">
+            <small class="text-danger"
+                *ngIf="(parkingForm.get('phNumber')?.dirty&&parkingForm.get('phNumber')?.invalid)||(parkingForm.get('phNumber')?.invalid&&submitted)">Please
+                enter No of floors</small>
+        </div>
+        <div class="form-group text-center">
+            <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;" (click)="submit()">Create</button>
+       </div>
+    </form>
+</div>

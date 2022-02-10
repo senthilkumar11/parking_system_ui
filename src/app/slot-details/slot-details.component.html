@@ -1,0 +1,53 @@
+<div class="container-sm border border-dark p-4 mt-3 rounded clearfix">
+    <h3>Parking Details <span [ngClass]="parkingDetails?.parkingType==='Unavailable'?'badge badge-success text text-danger':'badge badge-success text text-success'">{{parkingDetails?.parkingType}}</span></h3>
+    <div class="row m-4">
+        <div class="col">
+            <b>Floor : </b><span>{{parkingDetails?.slot?.floorId}}</span>
+        </div>
+
+        <div class="col">
+            <b>Vehicle In At : </b><span>{{parkingDetails?.entranceTime|date :'medium'}}</span>
+        </div>
+
+    </div>
+    <div class="row m-4">
+        <div class="col">
+            <b>Slot : </b><span>{{parkingDetails?.slot?.slotNumber}}</span>
+        </div>
+        <div class="col">
+            <b>Vehicle Out At : </b><span>{{parkingDetails?.exitTime|date :'medium'}}</span>
+        </div>
+    </div>
+
+
+    <div class="row m-4">
+        <div class="col">
+            <b>Vehicle Registration Number : </b><span>{{parkingDetails?.vehicleRegistrationNumber}}</span>
+        </div>
+        <div class="col ">
+            <b>Vehicle Type : </b><span>{{parkingDetails?.vehicleType}}</span>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col">
+            <b>Customer Name : </b><span>{{parkingDetails?.customerName}}</span>
+        </div>
+        <div class="col">
+            <b>Phone Number : </b><span>{{parkingDetails?.phNumber}}</span>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col">
+            <b>Fee: </b><span>{{parkingDetails?.fee | currency:'INR'}}</span>
+        </div>
+        <div class="col">
+            <b>Fee collected: </b><span>{{parkingDetails?.feeCollected}}</span>
+        </div>
+    </div>
+    <div class="row m-4" *ngIf="!(parkingDetails?.parkingType=='Unavailable')">
+        <button class="btn btn-primary" style="max-width: 300px;" (click)="unPark(parkingDetails?.id)" *ngIf="!(!parkingDetails?.feeCollected&&parkingDetails?.parkingType=='Collect Fee')">Un Park</button>
+        <button class="btn btn-primary" style="max-width: 300px;" (click)="collectFee(parkingDetails?.id)" *ngIf="(!parkingDetails?.feeCollected&&parkingDetails?.parkingType=='Collect Fee')">Collect Fee</button>
+    </div>
+
+
+</div>

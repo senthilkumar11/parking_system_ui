@@ -11,9 +11,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CreateSystemComponent } from './create-system/create-system.component';
+import { TokenInterceptor } from './service/token.interceptor';
+import { SlotDetailsComponent } from './slot-details/slot-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { CreateSystemComponent } from './create-system/create-system.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    CreateSystemComponent
+    CreateSystemComponent,
+    SlotDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { CreateSystemComponent } from './create-system/create-system.component';
     
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService],
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

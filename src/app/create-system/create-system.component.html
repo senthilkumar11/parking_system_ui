@@ -1,9 +1,28 @@
-<div class="container-sm p-4" style="max-width: 600px;">
-<form [formGroup]="systemForm" class="text-center border border-light p-5">
-    <p class="h4 mb-4">Create System</p>
+<div class="container-sm border border-dark p-4 mt-3 rounded" style="max-width: 600px;">
+    <form [formGroup]="systemForm" class="text-left border border-light p-5">
+        <p class="h4 mb-4 text-center">Create System</p>
 
-    <!-- Email -->
-    <input type="text" id="floors" class="form-control mb-4" formControlName="noOfFloors" placeholder="No of Floors">
-
-</form>
+        <div class="form-group mb-4">
+            <label for="floors">No of floors</label>
+            <input type="number" id="floors" class="form-control " formControlName="noOfFloors"
+                placeholder="No of Floors">
+            <small class="text-danger"
+                *ngIf="(systemForm.get('noOfFloors')?.dirty&&systemForm.get('noOfFloors')?.invalid)||(systemForm.get('noOfFloors')?.invalid&&submitted)">Please
+                enter No of floors</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="slot">Slots Per Floor</label>
+            <input type="number" id="slot" class="form-control " formControlName="slotsPerFloor"
+                placeholder="Slots Per Floor">
+            <small class="text-danger"
+                *ngIf="(systemForm.get('slotsPerFloor')?.dirty&&systemForm.get('slotsPerFloor')?.invalid)||(systemForm.get('slotsPerFloor')?.invalid&&submitted)">Please
+                enter slots per floor</small>
+        </div>
+        <div class="form-group text-center">
+            <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;" (click)="submit()">Create</button>
+          <div >  <small class="text-danger" *ngIf="error">Cannot create new system because it already created to modify please contact 123-456-7890</small>
+            <small class="text-success" *ngIf="created">created parking system</small></div>  
+        </div>
+  
+    </form>
 </div>
