@@ -1,0 +1,56 @@
+<div class="container-sm border border-dark p-4 mt-3 rounded" style="max-width: 600px;">
+    <form [formGroup]="feeForm" class="text-left border border-light p-3">
+        <p class="h4 mb-4 text-center">Update fee</p>
+        <div class="form-group mb-4">
+            <label for="vehicleType">Vehicle Type</label>
+            <select id="vehicleType" class="form-control" formControlName="vehicleType" >
+                <option *ngFor="let option of vehichleTypes" [value]="option.value">{{option.key}}</option>
+            </select>
+
+            <small class="text-danger"
+                *ngIf="(feeForm.get('vehicleType')?.dirty&&feeForm.get('vehicleType')?.invalid)||(feeForm.get('vehicleType')?.invalid&&submitted)">Please
+                enter vehicle type</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="basicFee">Basic Fee ₹</label>
+            <input type="number" id="basicFee" class="form-control " formControlName="basicFee" >
+            <small class="text-danger"
+                *ngIf="(feeForm.get('basicFee')?.dirty&&feeForm.get('basicFee')?.invalid)||(feeForm.get('basicFee')?.invalid&&submitted)">Please
+                enter basic fee</small>
+        </div>
+        <div class="form-group mb-4" >
+            <label for="hourlyFee">Hourly Fee ₹</label>
+            <input type="number" id="hourlyFee" class="form-control " formControlName="hourlyFee" >
+            <small class="text-danger"
+                *ngIf="(feeForm.get('hourlyFee')?.dirty&&feeForm.get('hourlyFee')?.invalid)||(feeForm.get('hourlyFee')?.invalid&&submitted)">Please
+                enter hourly fee</small>
+        </div>
+        <div class="form-group text-center">
+            <button block="true" class="btn btn-primary m " type="submit" style="min-width: 200px;" (click)="submit()">Update</button>
+       </div>
+    </form>
+    <table class="table table-striped mb-3">
+        <thead>
+            <tr>
+                
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Basic Fee</th>
+                <th scope="col">Hourly Fee</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let fee of feeDetails ">
+                <td>
+                    {{fee.vehicleType}}
+                </td>
+                <td>
+                    {{fee.basicFee}}
+                </td>
+                <td>
+                    {{fee.perHourFee}}
+                </td>
+            </tr>
+            </tbody>
+            </table>
+</div>

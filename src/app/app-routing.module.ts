@@ -1,6 +1,8 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddFeeComponent } from './add-fee/add-fee.component';
 import { CreateSystemComponent } from './create-system/create-system.component';
+import { GenerateCouponComponent } from './generate-coupon/generate-coupon.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NewEntryComponent } from './new-entry/new-entry.component';
@@ -37,6 +39,15 @@ const routes: Routes = [{
 {
   path:'create_system',
   component:CreateSystemComponent,
+  canActivate:[AuthGuard]
+},{
+  path:'update_fee',
+  component:AddFeeComponent,
+  canActivate:[AuthGuard]
+},
+{
+  path:'generate_coupon',
+  component:GenerateCouponComponent,
   canActivate:[AuthGuard]
 },
 {

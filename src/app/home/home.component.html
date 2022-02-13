@@ -1,1 +1,66 @@
-<p>home</p>
+<div class="container-sm border border-dark p-4 mt-3 mb-3 rounded">
+    <div class="row" *ngIf="homeDetails">
+        <div class="col">
+          <h4>
+            <b>
+                Total Floor : {{homeDetails?.totalFoor}}
+            </b>
+          </h4> 
+        </div>
+        <div class="col">
+            <h4>
+                <b>
+                    Slots per floor : {{homeDetails?.slotPerFloor}}
+                </b>
+            </h4>
+           
+        </div>
+        <div class="col">
+            <h4>
+                <b>
+                    Available Slot : {{homeDetails?.freeSlots +"/"+ homeDetails?.totalFoor*homeDetails?.slotPerFloor}}
+                </b>
+            </h4>
+           
+        </div>
+    </div>
+    <div *ngIf="!homeDetails">
+        No parking system found. Please Create system to continue <button class="btn btn-primary btn-sm" [routerLink]="['/create_system']" >Create slot</button>
+    </div>
+
+    <div class="row m-4">
+        <h2>
+            Transaction Summary
+        </h2>
+        <div class="col-3 form-group mb-4">
+            <label for="vehicleType">Vehicle Type</label>
+            <select id="vehicleType" class="form-control" [(ngModel)]="vehicleType" (input)="getTransactionSummary()">
+                <option *ngFor="let option of vehichleTypes" [value]="option.value">{{option.key}}</option>
+            </select>
+        </div>
+        <div>
+            <h4><b>
+                Total Slot : {{transactionSummary?.totalSlot}}
+            </b></h4>
+        </div>
+        
+        <div>
+            <h4><b>
+                Available Slot : {{transactionSummary?.availableSlot+"/"+ transactionSummary?.totalSlot}}
+            </b></h4>
+        </div>
+        <div>
+            <h4><b>
+                Total transaction completed : {{transactionSummary?.totalTransactionCompleted}}
+            </b></h4>
+        </div>
+        <div>
+            <h4><b>
+                Total Amount Collected: {{transactionSummary?.totalAmountCollected | currency:'INR'}}
+            </b></h4>
+        </div>
+    </div>
+    
+
+    
+</div>

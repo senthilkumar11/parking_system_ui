@@ -1,0 +1,63 @@
+<div class="container-sm border border-dark p-4 mt-3 rounded" style="max-width: 600px;">
+    <form [formGroup]="feeDiscountForm" class="text-left border border-light p-5">
+        <p class="h4 mb-4 text-center">Generate Coupon</p>
+
+        <div class="form-group mb-4">
+            <label for="basicFeeDiscount">First Hour Discount %</label>
+            <input type="number" id="basicFeeDiscount" class="form-control " formControlName="basicFeeDiscount">
+            <small class="text-danger"
+                *ngIf="(feeDiscountForm.get('basicFeeDiscount')?.dirty&&feeDiscountForm.get('basicFeeDiscount')?.invalid)||(feeDiscountForm.get('basicFeeDiscount')?.invalid&&submitted)">Please
+                enter First Hour Discount</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="hourlyFeeDiscount">Remaining Hour discount %</label>
+            <input type="number" id="hourlyFeeDiscount" class="form-control " formControlName="hourlyFeeDiscount">
+            <small class="text-danger"
+                *ngIf="(feeDiscountForm.get('hourlyFeeDiscount')?.dirty&&feeDiscountForm.get('hourlyFeeDiscount')?.invalid)||(feeDiscountForm.get('hourlyFeeDiscount')?.invalid&&submitted)">Please
+                enter Remaining Hour discount</small>
+        </div>
+        <div class="form-group mb-4">
+            <label for="count">Coupon Creation count</label>
+            <input type="number" id="count" class="form-control " formControlName="count">
+            <small class="text-danger"
+                *ngIf="(feeDiscountForm.get('count')?.dirty&&feeDiscountForm.get('count')?.invalid)||(feeDiscountForm.get('count')?.invalid&&submitted)">Please
+                enter Coupon Creation count</small>
+        </div>
+        <div class="form-group text-center">
+            <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;"
+                (click)="submit()">Generate</button>
+        </div>
+    </form>
+    <label for="search">Search</label>
+    <input type="text" id="search" class="form-control" (input)="search()" [(ngModel)]="searchData"/>
+    <table class="table table-striped mb-3">
+        <thead>
+            <tr>
+
+                <th scope="col">Code</th>
+                <th scope="col">Basic Fee Discount</th>
+                <th scope="col">Hourly Fee Discount</th>
+                <th scope="col">Used</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let fee of feeDiscountDetails ">
+                <td>
+                    {{fee.coupon}}
+                </td>
+                <td>
+                    {{fee.basicDiscount}}
+                </td>
+                <td>
+                    {{fee.hourlyDiscount}}
+                </td>
+                <td>
+                    {{fee.used}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination *ngIf="collectionSize>0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="collectionSize"
+        (pageChange)="pageChange($event)" [boundaryLinks]="true"></ngb-pagination>
+</div>

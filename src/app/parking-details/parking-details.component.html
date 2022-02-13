@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col form-group mb-4">
                 <label for="floor">Floor Number</label>
-                <input type="text" id="floor" class="form-control " formControlName="floor" placeholder="Floor Number">
+                <input type="text" id="floor" class="form-control " formControlName="floor" >
 
             </div>
             <div class="col form-group mb-4">
                 <label for="slot">Slot Number</label>
-                <input type="text" id="slot" class="form-control " formControlName="slot" placeholder="Slot Number">
+                <input type="text" id="slot" class="form-control " formControlName="slot" >
 
             </div>
         </div>
@@ -17,14 +17,14 @@
             <div class="col form-group mb-4">
                 <label for="parkingType">Parking Type</label>
                 <select id="parkingType" class="form-control" formControlName="parkingType">
-                    <option value="D">Select Park/Reserve</option>
-                    <option value="P">Park</option>
-                    <option value="R">Reserve</option>
+                    <!-- <option value="D">Select Park/Reserve</option> -->
+                    <option value="PARKING">Park</option>
+                    <option value="RESERVE">Reserve</option>
                 </select>
             </div>
             <div class="col form-group mb-4">
                 <label for="name">Name</label>
-                <input type="text" id="name" class="form-control " formControlName="customerName" placeholder="Name">
+                <input type="text" id="name" class="form-control " formControlName="customerName">
 
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div class="col form-group mb-4">
                 <label for="registrationNumber">Registration number</label>
                 <input type="text" id="registrationNumber" class="form-control "
-                    formControlName="vehicleRegistrationNumber" placeholder="Registration number">
+                    formControlName="vehicleRegistrationNumber" >
 
             </div>
             <div class="col form-group mb-4">
@@ -44,13 +44,25 @@
 
             </div>
         </div>
-
+        <div class="row">
+            <div class="col form-group mb-4">
+                <label for="availabilty">Availabilty</label>
+                <select id="availabilty" class="form-control" formControlName="availabilty">
+                    <option [value]="'A'">Both</option>
+                    <option [value]="true">Available</option>
+                    <option [value]="false">Unavailable</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group text-center">
             <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;"
                 (click)="submit()">Search</button>
+                <button block="true" class="btn btn-primary m-1 " style="min-width: 200px;"
+                (click)="searchForm.reset()">Reset</button>
         </div>
     </form>
-    <table class="table table-striped mb-3 table-hover">
+    <b>Total : {{collectionSize}}</b>
+    <table class="table table-striped mb-3 table-hover" *ngIf="parkingDetails">
         <thead>
             <tr>
                 <th scope="col">Floor Number</th>
@@ -58,6 +70,7 @@
                 <th scope="col">Vehicle Type</th>
                 <th scope="col">Vehicle Number</th>
                 <th scope="col">Parking Type</th>
+                <th scope="col">Availabilty</th>
                 <th scope="col">Name</th>
                 <th scope="col">Fee</th>
                 <th scope="col">Vehicle In</th>
@@ -71,8 +84,9 @@
                 <td>{{details?.vehicleType}}</td>
                 <td>{{details?.vehicleRegistrationNumber}}</td>
                 <td>{{details?.parkingType}}</td>
+                <td>{{details?.availabilty?'Available':'Unavailable'}}</td>
                 <td>{{details?.customerName}}</td>
-                <td>{{details?.fee | currency:'INR'}}</td>
+                <td>{{details?.finalFee | currency:'INR'}}</td>
                 <td>{{details?.entranceTime | date:'medium'}}</td>
                 <td>{{details?.exitTime | date:'medium'}}</td>
             </tr>

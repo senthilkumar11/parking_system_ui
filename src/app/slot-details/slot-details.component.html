@@ -1,5 +1,14 @@
 <div class="container-sm border border-dark p-4 mt-3 rounded clearfix">
-    <h3>Parking Details <span [ngClass]="parkingDetails?.parkingType==='Unavailable'?'badge badge-success text text-danger':'badge badge-success text text-success'">{{parkingDetails?.parkingType}}</span></h3>
+    <h2>Parking Details <span
+            [ngClass]="parkingDetails?.availabilty?'badge badge-success text text-success':'badge badge-success text text-danger'">{{parkingDetails?.availabilty?'Available':'Unavailable'}}</span>
+    </h2>
+    <div class="row m-2">
+        <div class="col">
+            <h3><b>Parking Type : </b><span
+                    class="badge badge-success text text-success">{{parkingDetails?.parkingType}}</span></h3>
+        </div>
+
+    </div>
     <div class="row m-4">
         <div class="col">
             <b>Floor : </b><span>{{parkingDetails?.slot?.floorId}}</span>
@@ -37,16 +46,52 @@
         </div>
     </div>
     <div class="row m-4">
-        <div class="col">
-            <b>Fee: </b><span>{{parkingDetails?.fee | currency:'INR'}}</span>
+        <div class="col text-danger">
+            <b>First Hour Fee: </b><span>{{(parkingDetails?.basicFee?parkingDetails?.basicFee:0) | currency:'INR'}}</span>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col text-danger">
+            <b>Remaining Hour Fee: </b><span>{{(parkingDetails?.remainingHourFee?parkingDetails?.remainingHourFee:0) | currency:'INR'}}</span>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col text-success">
+            <b>Discount: </b><span>{{(parkingDetails?.discount?parkingDetails?.discount:0) | currency:'INR'}}</span>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col text-danger">
+            <b>Total Fee: </b><span>{{(parkingDetails?.finalFee?parkingDetails?.finalFee:0) | currency:'INR'}}</span>
         </div>
         <div class="col">
             <b>Fee collected: </b><span>{{parkingDetails?.feeCollected}}</span>
         </div>
     </div>
+    <div class="row m-4">
+        <div class="col-2 form-group d-inline-block" *ngIf="(!parkingDetails?.feeCollected&&!parkingDetails?.availabilty)||couponCode">
+            <label for="count">Coupon Creation count</label>
+            <input type="text" id="count" class="form-control " [(ngModel)]="couponCode">
+            <small class="text-danger" *ngIf="(!couponCode&&applyCoupon)||errApplyingCoupon">Please
+                enter valid Coupon code</small>
+          
+        </div>
+        <div class="col-2 form-group d-inline-block" style="line-height: 5;">
+            <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;" *ngIf="(!parkingDetails?.feeCollected&&!parkingDetails?.availabilty)"
+                (click)="applyCouponCode()">apply Discount Coupon</button>
+        </div>
+        <div class="col">
+
+        </div>
+
+    </div>
     <div class="row m-4" *ngIf="!(parkingDetails?.parkingType=='Unavailable')">
-        <button class="btn btn-primary" style="max-width: 300px;" (click)="unPark(parkingDetails?.id)" *ngIf="!(!parkingDetails?.feeCollected&&parkingDetails?.parkingType=='Collect Fee')">Un Park</button>
-        <button class="btn btn-primary" style="max-width: 300px;" (click)="collectFee(parkingDetails?.id)" *ngIf="(!parkingDetails?.feeCollected&&parkingDetails?.parkingType=='Collect Fee')">Collect Fee</button>
+        <button class="btn btn-primary" style="max-width: 300px;" (click)="unPark(parkingDetails?.id)"
+            *ngIf="(!parkingDetails?.feeCollected&&parkingDetails?.availabilty)">Un Park</button>
+        <button class="btn btn-primary" style="max-width: 300px;" (click)="unPark(parkingDetails?.id)"
+            *ngIf="(parkingDetails?.feeCollected&&parkingDetails?.availabilty)">Un Reserve</button>
+        <button class="btn btn-primary" style="max-width: 300px;" (click)="collectFee(parkingDetails?.id)"
+            *ngIf="(!parkingDetails?.feeCollected&&!parkingDetails?.availabilty)">Collect Fee</button>
     </div>
 
 

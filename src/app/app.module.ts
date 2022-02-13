@@ -19,7 +19,9 @@ import { SlotDetailsComponent } from './slot-details/slot-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModule, NgbNav, NgbNavModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddFeeComponent } from './add-fee/add-fee.component';
+import { GenerateCouponComponent } from './generate-coupon/generate-coupon.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     LoginComponent,
     CreateSystemComponent,
-    SlotDetailsComponent
+    SlotDetailsComponent,
+    AddFeeComponent,
+    GenerateCouponComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,10 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgbNavModule,
+    NgbModule
+
     
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

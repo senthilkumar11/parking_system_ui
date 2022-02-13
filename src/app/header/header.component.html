@@ -1,14 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #e3f2fd;">
-    <div class="navbar-brand">
+    <div class="navbar-brand text-wrap">
         <img [src]="headerLogoFilename" width="30" height="30" class="d-inline-block align-top" alt="3M"> 
-        <h4 class="d-inline-block align-top m-0 custom-bold">
+        <h4 class="d-inline-block m-0 custom-bold">
             Parking System
         </h4>
-        <button class="btn btn-primary" [routerLink]="['/home']" *ngIf="isLoggedIn">Home</button>
-        <button class="btn btn-primary" [routerLink]="['/park']" *ngIf="isLoggedIn">Park/Reserve</button>
-        <button class="btn btn-primary" [routerLink]="['/parking_details']" *ngIf="isLoggedIn">Parking Details</button>
-        <button class="btn btn-primary" [routerLink]="['/create_system']" *ngIf="isLoggedIn">Create System</button>
-       
+        <button class="btn btn-primary m-1" [routerLink]="['/home']" *ngIf="isLoggedIn">Home</button>
+        <button class="btn btn-primary m-1" [routerLink]="['/park']" *ngIf="isLoggedIn">Park/Reserve</button>
+        <button class="btn btn-primary m-1" [routerLink]="['/parking_details']" *ngIf="isLoggedIn">Parking Details</button>
+        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown" *ngIf="isLoggedIn">
+            <button class="btn btn-primary mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Create System</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+              <button ngbDropdownItem [routerLink]="['/create_system']" >Create slot</button>
+              <button ngbDropdownItem [routerLink]="['/update_fee']">Update Fee</button>
+              <button ngbDropdownItem [routerLink]="['/generate_coupon']">Generate Coupon</button>
+            </div>
+          </div>
     </div>
     <div class="navbar-brand ms-auto">
         <button class="btn btn-primary" [routerLink]="['/login']" *ngIf="!isLoggedIn">Login</button>

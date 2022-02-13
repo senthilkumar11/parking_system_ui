@@ -7,5 +7,5 @@ export class SearchRequest{
 	 pageNumber!:number;
 	 pageSize!:number;
 	availabilty!:boolean;
-    parkingType!:string;
+    parkingType!:any;
 }

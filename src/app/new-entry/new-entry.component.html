@@ -4,18 +4,25 @@
         <div class="form-group mb-4">
             <label for="parkingType">Parking Type</label>
             <select  id="parkingType" class="form-control" formControlName="parkingType" >
-                <option value="D">Select Park/Reserve</option>
-                <option value="P">Park</option>
-                <option value="R">Reserve</option>
+                <!-- <option value="D">Select Park/Reserve</option> -->
+                <option value="PARKING">Park</option>
+                <option value="RESERVE">Reserve</option>
             </select>
             
             <small class="text-danger"
-                *ngIf="(parkingForm.get('vehicleType')?.dirty&&parkingForm.get('vehicleType')?.invalid)||(parkingForm.get('vehicleType')?.invalid&&submitted)">Please
-                enter No of floors</small>
+                *ngIf="(parkingForm.get('parkingType')?.dirty&&parkingForm.get('parkingType')?.invalid)||(parkingForm.get('parkingType')?.invalid&&submitted)">Please
+                enter parking type</small>
+        </div>
+        <div class="form-group mb-4" *ngIf="parkingForm.get('parkingType')?.value==='RESERVE'">
+            <label for="fee">Fee ₹</label>
+            <input type="number" id="fee" class="form-control " formControlName="fee">
+            <small class="text-danger"
+                *ngIf="(parkingForm.get('fee')?.dirty&&parkingForm.get('fee')?.invalid)||(parkingForm.get('fee')?.invalid&&submitted)">Please
+                enter fee</small>
         </div>
         <div class="form-group mb-4">
             <label for="name">Name</label>
-            <input type="text" id="name" class="form-control " formControlName="customerName" placeholder="Name">
+            <input type="text" id="name" class="form-control " formControlName="customerName" >
             <small class="text-danger"
                 *ngIf="(parkingForm.get('customerName')?.dirty&&parkingForm.get('customerName')?.invalid)||(parkingForm.get('customerName')?.invalid&&submitted)">Please
                 enter name</small>
@@ -23,7 +30,7 @@
         <div class="form-group mb-4">
             <label for="registrationNumber">Registration number</label>
             <input type="text" id="registrationNumber" class="form-control "
-                formControlName="vehicleRegistrationNumber" placeholder="Registration number">
+                formControlName="vehicleRegistrationNumber">
             <small class="text-danger"
                 *ngIf="(parkingForm.get('vehicleRegistrationNumber')?.dirty&&parkingForm.get('vehicleRegistrationNumber')?.invalid)||(parkingForm.get('vehicleRegistrationNumber')?.invalid&&submitted)">Please
                 enter Registration number</small>
@@ -36,17 +43,20 @@
             
             <small class="text-danger"
                 *ngIf="(parkingForm.get('vehicleType')?.dirty&&parkingForm.get('vehicleType')?.invalid)||(parkingForm.get('vehicleType')?.invalid&&submitted)">Please
-                enter No of floors</small>
+                enter vehicle type</small>
         </div>
         <div class="form-group mb-4">
             <label for="phNumber">Phone Number</label>
-            <input type="text" id="phNumber" class="form-control " formControlName="phNumber" placeholder="Phone Number">
+            <input type="text" id="phNumber" class="form-control " formControlName="phNumber" >
             <small class="text-danger"
                 *ngIf="(parkingForm.get('phNumber')?.dirty&&parkingForm.get('phNumber')?.invalid)||(parkingForm.get('phNumber')?.invalid&&submitted)">Please
-                enter No of floors</small>
+                enter Phone Number</small>
         </div>
         <div class="form-group text-center">
             <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;" (click)="submit()">Create</button>
+            <br>
+            <small class="text-danger"
+                *ngIf="error">{{errMsg?errMsg:'Please enter valid details'}}</small>
        </div>
     </form>
 </div>

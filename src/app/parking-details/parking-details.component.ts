@@ -11,17 +11,18 @@ import { ParkingService } from '../service/parking.service';
 })
 export class ParkingDetailsComponent implements OnInit {
   searchForm: FormGroup = this.fb.group({
-    parkingType: new FormControl('D'),
+    parkingType: new FormControl(''),
     vehicleRegistrationNumber: new FormControl(''),
     customerName: new FormControl(''),
     vehicleType: new FormControl(''),
     floor: new FormControl(''),
-    slot: new FormControl('')
+    slot: new FormControl(''),
+    availabilty:new FormControl('A')
   })
   page:number=1;
   pageSize:number=10;
   collectionSize:number=0;
-  vehichleTypes: any[] = [{ value: -1, key: 'Select Vehichle Type' },
+  vehichleTypes: any[] = [
   { value: 0, key: 'BIKE' }, { value: 1, key: 'CAR' }, { value: 2, key: 'BUS' }]
   submitted: boolean = false;
   parkingDetails!:any;
@@ -45,10 +46,18 @@ export class ParkingDetailsComponent implements OnInit {
     searchRequest.vehicleRegistrationNumber=this.searchForm.get("vehicleRegistrationNumber")?.value;
     if(this.searchForm.get("vehicleType")?.value&&this.searchForm.get("vehicleType")?.value!=-1)
     searchRequest.vehicleType=this.searchForm.get("vehicleType")?.value;
+    if(this.searchForm.get("parkingType")?.value){
     searchRequest.parkingType=this.searchForm.get("parkingType")?.value;
+    }else{
+      searchRequest.parkingType=null;
+    }
+    if(this.searchForm.get("availabilty")?.value&&this.searchForm.get("availabilty")?.value!='A'){
+      searchRequest.availabilty=this.searchForm.get("availabilty")?.value;
+    }
     this.parkingService.search(searchRequest).subscribe({next:(data:any)=>{
         this.parkingDetails=data.parkingDetails;
-        this.collectionSize=data?.pageTotal;
+        this.collectionSize=data?.total;
+        console.log(data);
     },error:(err:any)=>{
 
     }
