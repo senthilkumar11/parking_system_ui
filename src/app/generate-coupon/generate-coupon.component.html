@@ -1,4 +1,4 @@
-<div class="container-sm border border-dark p-4 mt-3 rounded" style="max-width: 600px;">
+<div class="container-sm border border-dark p-4 mt-3 rounded" style="max-width: 800px;">
     <form [formGroup]="feeDiscountForm" class="text-left border border-light p-5">
         <p class="h4 mb-4 text-center">Generate Coupon</p>
 
@@ -6,26 +6,30 @@
             <label for="basicFeeDiscount">First Hour Discount %</label>
             <input type="number" id="basicFeeDiscount" class="form-control " formControlName="basicFeeDiscount">
             <small class="text-danger"
-                *ngIf="(feeDiscountForm.get('basicFeeDiscount')?.dirty&&feeDiscountForm.get('basicFeeDiscount')?.invalid)||(feeDiscountForm.get('basicFeeDiscount')?.invalid&&submitted)">Please
-                enter First Hour Discount</small>
+                *ngIf="(feeDiscountForm.get('basicFeeDiscount')?.dirty&&feeDiscountForm.get('basicFeeDiscount')?.invalid)||(feeDiscountForm.get('basicFeeDiscount')?.invalid&&submitted)">
+                {{feeDiscountForm.get('basicFeeDiscount')?.value?'Discount range should be 0-100':'Pleas enter First Hour Discount'}}</small>
         </div>
         <div class="form-group mb-4">
             <label for="hourlyFeeDiscount">Remaining Hour discount %</label>
             <input type="number" id="hourlyFeeDiscount" class="form-control " formControlName="hourlyFeeDiscount">
             <small class="text-danger"
-                *ngIf="(feeDiscountForm.get('hourlyFeeDiscount')?.dirty&&feeDiscountForm.get('hourlyFeeDiscount')?.invalid)||(feeDiscountForm.get('hourlyFeeDiscount')?.invalid&&submitted)">Please
-                enter Remaining Hour discount</small>
+                *ngIf="(feeDiscountForm.get('hourlyFeeDiscount')?.dirty&&feeDiscountForm.get('hourlyFeeDiscount')?.invalid)||(feeDiscountForm.get('hourlyFeeDiscount')?.invalid&&submitted)">
+                {{feeDiscountForm.get('hourlyFeeDiscount')?.value?'Discount range should be 0-100':'Please enter Remaining Hour discount'}}</small>
         </div>
         <div class="form-group mb-4">
             <label for="count">Coupon Creation count</label>
             <input type="number" id="count" class="form-control " formControlName="count">
             <small class="text-danger"
-                *ngIf="(feeDiscountForm.get('count')?.dirty&&feeDiscountForm.get('count')?.invalid)||(feeDiscountForm.get('count')?.invalid&&submitted)">Please
-                enter Coupon Creation count</small>
+                *ngIf="(feeDiscountForm.get('count')?.dirty&&feeDiscountForm.get('count')?.invalid)||(feeDiscountForm.get('count')?.invalid&&submitted)">
+                {{feeDiscountForm.get('count')?.value?'Coupon can create range between 1-100':'Please enter Coupon Creation count'}}</small>
         </div>
         <div class="form-group text-center">
             <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;"
                 (click)="submit()">Generate</button>
+            <br>
+                <small class="text-success" *ngIf="success">Generated Successfully</small> 
+                <small class="text-success" *ngIf="error">Coupon creation failed</small> 
+                
         </div>
     </form>
     <label for="search">Search</label>
@@ -38,6 +42,8 @@
                 <th scope="col">Basic Fee Discount</th>
                 <th scope="col">Hourly Fee Discount</th>
                 <th scope="col">Used</th>
+                <th scope="col">Generated Date</th>
+                <th scope="col">Used At</th>
 
             </tr>
         </thead>
@@ -54,6 +60,12 @@
                 </td>
                 <td>
                     {{fee.used}}
+                </td>
+                <td>
+                    {{fee?.createdDate|date :'medium'}}
+                </td>
+                <td>
+                    {{fee?.usedDate|date :'medium'}}
                 </td>
             </tr>
         </tbody>

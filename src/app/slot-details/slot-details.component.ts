@@ -13,6 +13,7 @@ export class SlotDetailsComponent implements OnInit {
   couponCode!: string;
   applyCoupon!: boolean;
   err: boolean = false;
+  errDetails!:any;
   errApplyingCoupon:boolean=false
   constructor(private activatedRoute: ActivatedRoute, private parkingService: ParkingService) { }
 
@@ -58,8 +59,9 @@ export class SlotDetailsComponent implements OnInit {
     this.parkingService.collectFee(id).subscribe({
       next: (res: any) => {
         this.parkingDetails = res;
-      }, error: () => {
-
+      }, error: (errdetails:any) => {
+        this.err=true;
+      this.errDetails=errdetails;
       }
     })
   }

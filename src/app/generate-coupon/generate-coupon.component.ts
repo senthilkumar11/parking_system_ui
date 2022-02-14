@@ -12,9 +12,9 @@ import { ParkingService } from '../service/parking.service';
 export class GenerateCouponComponent implements OnInit {
   feeDiscountForm: FormGroup = this.fb.group({
 
-    count: new FormControl('', Validators.required),
-    hourlyFeeDiscount: new FormControl('', Validators.required),
-    basicFeeDiscount: new FormControl('', Validators.required)
+    count: new FormControl('', [Validators.required,Validators.min(1),Validators.max(100)]),
+    hourlyFeeDiscount: new FormControl('', [Validators.required,Validators.min(0),Validators.max(100)]),
+    basicFeeDiscount: new FormControl('', [Validators.required,Validators.min(0),Validators.max(100)])
   })
   submitted: boolean = false;
   error: boolean = false;
@@ -23,6 +23,7 @@ export class GenerateCouponComponent implements OnInit {
   pageSize:number=10;
   collectionSize:number=0;
   searchData:string="";
+  success:boolean=false;
   constructor(private fb: FormBuilder, private parkingService: ParkingService, private route: Router) { }
 
 
@@ -39,6 +40,7 @@ export class GenerateCouponComponent implements OnInit {
       coupon.count=this.feeDiscountForm.get('count')?.value;
       this.parkingService.generateCoupon(coupon).subscribe({
         next:(data:any)=>{
+
           this.page=1;
           this.getDiscountDetails()
         },error:(err:any)=>{
