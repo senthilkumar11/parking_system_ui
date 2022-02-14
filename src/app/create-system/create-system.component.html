@@ -6,15 +6,15 @@
             <label for="floors">No of floors</label>
             <input type="number" id="floors" class="form-control " formControlName="noOfFloors">
             <small class="text-danger"
-                *ngIf="(systemForm.get('noOfFloors')?.dirty&&systemForm.get('noOfFloors')?.invalid)||(systemForm.get('noOfFloors')?.invalid&&submitted)">Please
-                enter No of floors</small>
+                *ngIf="(systemForm.get('noOfFloors')?.dirty&&systemForm.get('noOfFloors')?.invalid)||(systemForm.get('noOfFloors')?.invalid&&submitted)">
+                {{systemForm.get('noOfFloors')?.value?'Floor should be one or more':'Please enter No of floors'}}</small>
         </div>
         <div class="form-group mb-4">
             <label for="slot">Slots Per Floor</label>
             <input type="number" id="slot" class="form-control " formControlName="slotsPerFloor">
             <small class="text-danger"
-                *ngIf="(systemForm.get('slotsPerFloor')?.dirty&&systemForm.get('slotsPerFloor')?.invalid)||(systemForm.get('slotsPerFloor')?.invalid&&submitted)">Please
-                enter slots per floor</small>
+                *ngIf="(systemForm.get('slotsPerFloor')?.dirty&&systemForm.get('slotsPerFloor')?.invalid)||(systemForm.get('slotsPerFloor')?.invalid&&submitted)">
+                {{systemForm.get('slotsPerFloor')?.value?'Slots should be one or more':'Please enter slots per floor'}}</small>
         </div>
         <div class="form-group text-center">
             <button block="true" class="btn btn-primary m-1 " type="submit" style="min-width: 200px;"

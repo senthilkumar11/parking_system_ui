@@ -11,8 +11,8 @@ import { ParkingService } from '../service/parking.service';
 })
 export class CreateSystemComponent implements OnInit {
   systemForm:FormGroup=this.fb.group({
-    noOfFloors:new FormControl('',[Validators.required]),
-    slotsPerFloor:new FormControl('',[Validators.required])
+    noOfFloors:new FormControl('',[Validators.required,Validators.min(1)]),
+    slotsPerFloor:new FormControl('',[Validators.required,Validators.min(1)])
   });
   submitted:boolean=false;
   error:boolean=false;
